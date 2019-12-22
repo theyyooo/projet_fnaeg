@@ -3,6 +3,7 @@ package Main;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import Controllers.MainController;
 import Fenetres.Fenetre;
 
 public class App {
@@ -23,6 +24,8 @@ public class App {
 		Fenetre fenetre = new Fenetre();
 		
 		fenetre.setVisible(true);
+		
+		MainController c = new MainController(fenetre);
 
 	}
 
