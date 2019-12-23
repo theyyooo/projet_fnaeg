@@ -2,6 +2,7 @@ package Controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -11,10 +12,12 @@ import Fenetres.Fenetre;
 public class MainController implements ActionListener {
 	
 	public Fenetre fenetre;
+	Connection cnx;
 	
-	public MainController(Fenetre f) {
+	public MainController(Fenetre f, Connection cnx) {
 		
 		this.fenetre = f;	
+		this.cnx = cnx;
 		
 		fenetre.switchPannels(fenetre.panel1);
 
@@ -34,11 +37,9 @@ public class MainController implements ActionListener {
 		switch (btn.getName()) {
 		case "rechercher":
 			SearchController search = new SearchController(this.fenetre);
-			System.out.println("hello1");
-
 			break;
 		case "newProfil":
-			AffaireController affaire = new AffaireController(this.fenetre);
+			AffaireController affaire = new AffaireController(this.fenetre, cnx);
 			break;
 
 		default:
