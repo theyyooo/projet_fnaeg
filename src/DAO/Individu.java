@@ -7,7 +7,6 @@ public class Individu {
 	private String Matricule;
 	private String Nom;
 	private String Prenom;
-	private Date Anniversaire;
 	private String Adresse;
 	private String Ville;
 	private String Pays;
@@ -19,11 +18,10 @@ public class Individu {
 		
 	}
 	
-	public Individu(String Matricule, String Nom, String Prenom, Date Anniversaire, String Adresse, String Ville, String Pays) {
+	public Individu(String Matricule, String Nom, String Prenom, String Adresse, String Ville, String Pays) {
 		this.Matricule = Matricule;
 		this.Nom = Nom;
 		this.Prenom = Prenom;
-		this.Anniversaire = Anniversaire;
 		this.Adresse = Adresse;
 		this.Ville = Ville;
 		this.Pays = Pays;
@@ -57,14 +55,6 @@ public class Individu {
 		return this;
 	}
 
-	public Date getAnniversaire() {
-		return Anniversaire;
-	}
-
-	public Individu setAnniversaire(Date anniversaire) {
-		Anniversaire = anniversaire;
-		return this;
-	}
 
 	public String getAdresse() {
 		return Adresse;

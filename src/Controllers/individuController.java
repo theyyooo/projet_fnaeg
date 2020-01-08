@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -7,19 +8,25 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
+import DAO.Casier;
+import DAO.DAOCasier;
 import DAO.DAOIndividu;
+import DAO.DAOInfraction;
 import DAO.Individu;
+import DAO.Infraction;
 import Fenetres.Fenetre;
 
-public class AffaireController implements ActionListener {
+public class individuController implements ActionListener {
 
 	private Fenetre fenetre;
 	Connection cnx;
 	
-	public AffaireController(Fenetre fenetre, Connection cnx){
+	public individuController(Fenetre fenetre, Connection cnx){
 		this.fenetre = fenetre;
 		this.cnx = cnx;
 		fenetre.switchPannels(fenetre.panel3);
@@ -45,20 +52,22 @@ public class AffaireController implements ActionListener {
 			String Pays = fenetre.getTextField_6().getText();
 			
 			
-			//Date Naissance = simple.parse(fenetre.getFormattedTextField().getText());
-			Date Naissance = null;
 			
-			Individu personne = new Individu(Matricule, Nom, Prenom, Naissance, Adresse, Ville, Pays);
+			Individu personne = new Individu(Matricule, Nom, Prenom, Adresse, Ville, Pays);
+			
+	
 			DAOIndividu daoin = new DAOIndividu(cnx);
 			
 			try {
 				daoin.save(personne);
+				
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+				
 			
-			IndividuController i = new IndividuController(fenetre);
+			infractionController i = new infractionController(fenetre, cnx, personne.getMatricule());
 					
 			
 			break;

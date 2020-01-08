@@ -39,7 +39,7 @@ public class MainController implements ActionListener {
 			SearchController search = new SearchController(this.fenetre);
 			break;
 		case "newProfil":
-			AffaireController affaire = new AffaireController(this.fenetre, cnx);
+			individuController affaire = new individuController(this.fenetre, cnx);
 			break;
 
 		default:

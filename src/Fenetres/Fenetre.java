@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import DAO.DAOInfraction;
+import DAO.Infraction;
+
 import javax.swing.JLayeredPane;
 import java.awt.CardLayout;
 import javax.swing.JLabel;
@@ -18,9 +22,16 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.swing.JTextPane;
 import javax.swing.JFormattedTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
+import  javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;  
 
 public class Fenetre extends JFrame {
 
@@ -42,8 +53,14 @@ public class Fenetre extends JFrame {
 	private JTextField textField_6;
 	private JButton btnCliquezIciPour;
 	private JButton btnPrcdent;
-	private JFormattedTextField formattedTextField;
 	private JButton btnNewButton;
+	public JComboBox comboBox;
+	private JButton button;
+	private JButton button_1;
+	private JTextField textField_3;
+	private JTextField textField_7;
+	private JButton button_3;
+	private JButton button_2;
 
 	/**
 	 * Launch the application.
@@ -94,7 +111,7 @@ public class Fenetre extends JFrame {
 		panel1.setLayout(null);
 		
 		lblRecherche = new JLabel("Nom de l'individu recherché: ");
-		lblRecherche.setFont(new Font("Dialog", Font.ITALIC, 20));
+		lblRecherche.setFont(new Font("Dialog", Font.ITALIC, 30));
 		lblRecherche.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRecherche.setBounds(0, 50, 1000, 50);
 		panel1.add(lblRecherche);
@@ -127,6 +144,46 @@ public class Fenetre extends JFrame {
 		panel2.setLayout(null);
 		
 		this.panel2 = panel2;
+		
+		JLabel lblNouvelleAffaire = new JLabel("Nouvelle affaire:");
+		lblNouvelleAffaire.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNouvelleAffaire.setFont(new Font("Dialog", Font.ITALIC, 30));
+		lblNouvelleAffaire.setBounds(0, 12, 1000, 50);
+		panel2.add(lblNouvelleAffaire);
+		
+		textField_3 = new JTextField();
+		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_3.setColumns(10);
+		textField_3.setBounds(400, 133, 200, 40);
+		panel2.add(textField_3);
+		
+		textField_7 = new JTextField();
+		textField_7.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_7.setColumns(10);
+		textField_7.setBounds(100, 267, 800, 140);
+		panel2.add(textField_7);
+		
+		JLabel lblNumAffaire = new JLabel("Num Affaire:");
+		lblNumAffaire.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNumAffaire.setFont(new Font("Dialog", Font.ITALIC, 20));
+		lblNumAffaire.setBounds(425, 95, 150, 15);
+		panel2.add(lblNumAffaire);
+		
+		JLabel lblDescription = new JLabel("Description:");
+		lblDescription.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDescription.setFont(new Font("Dialog", Font.ITALIC, 20));
+		lblDescription.setBounds(425, 218, 150, 15);
+		panel2.add(lblDescription);
+		
+		button_2 = new JButton("Suivant ->");
+		button_2.setName("suivant");
+		button_2.setBounds(800, 174, 140, 40);
+		panel2.add(button_2);
+		
+		button_3 = new JButton("<- Précédent");
+		button_3.setName("precedent");
+		button_3.setBounds(60, 174, 140, 40);
+		panel2.add(button_3);
 
 		//PANNEL 3
 		
@@ -137,19 +194,19 @@ public class Fenetre extends JFrame {
 		JLabel lblNouveauProfil_1 = new JLabel("Nouveau profil:");
 		lblNouveauProfil_1.setFont(new Font("Dialog", Font.PLAIN, 30));
 		lblNouveauProfil_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNouveauProfil_1.setBounds(0, 50, 1000, 50);
+		lblNouveauProfil_1.setBounds(0, 22, 1000, 50);
 		panel3.add(lblNouveauProfil_1);
 		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setBounds(425, 141, 150, 25);
+		textField.setBounds(137, 299, 150, 25);
 		panel3.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Matricule:");
 		lblNewLabel.setFont(new Font("Dialog", Font.ITALIC, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(425, 114, 150, 15);
+		lblNewLabel.setBounds(37, 272, 350, 15);
 		panel3.add(lblNewLabel);
 		
 		btnNewButton = new JButton("Suivant ->");
@@ -199,12 +256,6 @@ public class Fenetre extends JFrame {
 		lblPrenom.setBounds(137, 193, 150, 15);
 		panel3.add(lblPrenom);
 		
-		JLabel lblDateDeNaissance = new JLabel("Date de Naissance:  (AAAA-MM-JJ)");
-		lblDateDeNaissance.setFont(new Font("Dialog", Font.ITALIC, 20));
-		lblDateDeNaissance.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDateDeNaissance.setBounds(37, 272, 350, 15);
-		panel3.add(lblDateDeNaissance);
-		
 		JLabel lblAdresse = new JLabel("Adresse: ");
 		lblAdresse.setFont(new Font("Dialog", Font.ITALIC, 20));
 		lblAdresse.setHorizontalAlignment(SwingConstants.CENTER);
@@ -231,10 +282,6 @@ public class Fenetre extends JFrame {
 		panel3.add(btnPrcdent);
 		
 		
-		formattedTextField = new JFormattedTextField(new SimpleDateFormat("yyyy/MM/dd"));
-		formattedTextField.setHorizontalAlignment(SwingConstants.CENTER);
-		formattedTextField.setBounds(137, 299, 150, 25);
-		panel3.add(formattedTextField);
 
 		
 		this.panel3 = panel3;
@@ -252,6 +299,36 @@ public class Fenetre extends JFrame {
 		contentPane.add(lblApplicationDeGestion);
 		
 		this.panel4 = panel4;
+		
+		JLabel lblInfraction = new JLabel("Nouvelle infraction: ");
+		lblInfraction.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInfraction.setFont(new Font("Dialog", Font.PLAIN, 30));
+		lblInfraction.setBounds(0, 12, 1000, 50);
+		panel4.add(lblInfraction);
+		
+		String [] patternExamples = {
+		         "Vol",
+		         "Viol",
+		         "Homicide volontaire",
+		         "Homicide involontaire",
+		         "Vol avec violence"
+		};
+		
+		comboBox = new JComboBox(patternExamples);
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Vol", "Viol", "Homicide volontaire", "Homicide involontaire", "Vol avec violence"}));
+		comboBox.setFont(new Font("Dialog", Font.ITALIC, 20));
+		comboBox.setBounds(375, 127, 250, 40);
+		panel4.add(comboBox);
+		
+		button = new JButton("Suivant ->");
+		button.setName("suivant");
+		button.setBounds(600, 340, 140, 40);
+		panel4.add(button);
+		
+		button_1 = new JButton("<- Précédent");
+		button_1.setName("precedent");
+		button_1.setBounds(260, 340, 140, 40);
+		panel4.add(button_1);
 	}
 	public JTextField getTextField() {
 		return textField;
@@ -322,10 +399,33 @@ public class Fenetre extends JFrame {
 	public void setTextField_1(JTextField textField_1) {
 		this.textField_1 = textField_1;
 	}
-	public JFormattedTextField getFormattedTextField() {
-		return formattedTextField;
-	}
+
 	public JButton getBtnNewButton() {
 		return btnNewButton;
+	}
+	public JComboBox getComboBox() {
+		return comboBox;
+	}
+	public void setComboBox(JComboBox comboBox) {
+		this.comboBox = comboBox;
+	}
+
+	public JButton getButton() {
+		return button;
+	}
+	public JButton getButton_1() {
+		return button_1;
+	}
+	public JTextField getTextField_3() {
+		return textField_3;
+	}
+	public JTextField getTextField_7() {
+		return textField_7;
+	}
+	public JButton getButton_3() {
+		return button_3;
+	}
+	public JButton getButton_2() {
+		return button_2;
 	}
 }

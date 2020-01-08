@@ -27,7 +27,6 @@ public class DAOIndividu {
 		Individu c = new Individu()
 				.setNom(result.getString("Nom"))
 				.setPrenom(result.getString("Prenom"))
-				//.setAnniversaire(result.getDate("DateNaissance"))
 				.setAdresse(result.getString("Adresse"))
 				.setVille(result.getString("Ville"))
 				.setPays(result.getString("Pays"))
@@ -53,7 +52,6 @@ public class DAOIndividu {
 		preparedStatement.setString(1,i.getMatricule());
 		preparedStatement.setString(2,i.getNom());
 		preparedStatement.setString(3,i.getPrenom());
-		//preparedStatement.setDate(4,(Date) i.getAnniversaire());
 		preparedStatement.setString(4,i.getAdresse());
 		preparedStatement.setString(5,i.getVille());
 		preparedStatement.setString(6,i.getPays());
@@ -70,7 +68,6 @@ public class DAOIndividu {
 		String SQL = "UPDATE Personnes "
 				+ "SET Nom=?, "
 				+ "Prenom=?, "
-				+ "DateNaissance=? "
 				+ "Adresse=? "
 				+ "Ville=? "
 				+ "Pays=? "
@@ -78,10 +75,9 @@ public class DAOIndividu {
 		PreparedStatement preparedStatement = cnx.prepareStatement(SQL);
 		preparedStatement.setString(1,i.getNom());
 		preparedStatement.setString(2,i.getPrenom());
-		//preparedStatement.setDate(3,(Date) i.getAnniversaire());
-		preparedStatement.setString(4,i.getAdresse());
-		preparedStatement.setString(5,i.getVille());
-		preparedStatement.setString(6,i.getPays());
+		preparedStatement.setString(3,i.getAdresse());
+		preparedStatement.setString(4,i.getVille());
+		preparedStatement.setString(5,i.getPays());
 		
 		preparedStatement.executeQuery();
 	}
@@ -118,7 +114,6 @@ public class DAOIndividu {
 					.setMatricule(result.getString("Matricule"))
 					.setNom(result.getString("Nom"))
 					.setPrenom(result.getString("Prenom"))
-					//.setAnniversaire(result.getDate("DateNaissance"))
 					.setAdresse(result.getString("Adresse"))
 					.setVille(result.getString("Ville"))
 					.setPays(result.getString("Pays"));
