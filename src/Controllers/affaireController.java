@@ -3,9 +3,12 @@ package Controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 
+import DAO.DAOInfraction;
+import DAO.Infraction;
 import Fenetres.Fenetre;
 
 public class affaireController implements ActionListener {
@@ -25,13 +28,7 @@ public class affaireController implements ActionListener {
 		
 		fenetre.getButton_2().addActionListener(this);
 		fenetre.getButton_3().addActionListener(this);
-		
-		System.out.println(Matricule);
-		System.out.println(CodeI);
-		
-		
-		
-		
+			
 	}
 
 	@Override
@@ -44,8 +41,10 @@ public class affaireController implements ActionListener {
 		switch (btn.getName()) {
 		case "suivant":
 			
+			String NumAffaire = fenetre.getTextField_3().getText();
+			String DescAffaire = fenetre.getTextField_7().getText();	
 			
-			
+			casierController casier = new casierController(fenetre, cnx, Matricule, CodeI, NumAffaire);
 		
 			
 			break;

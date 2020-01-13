@@ -39,6 +39,7 @@ public class Fenetre extends JFrame {
 	public JPanel panel2;
 	public JPanel panel3;
 	public JPanel panel4;
+	public JPanel panel5;
 	
 	private JPanel contentPane;
 	private JTextField fieldIndividu;
@@ -61,6 +62,7 @@ public class Fenetre extends JFrame {
 	private JTextField textField_7;
 	private JButton button_3;
 	private JButton button_2;
+	private JLabel lblCasierDeLa;
 
 	/**
 	 * Launch the application.
@@ -329,6 +331,16 @@ public class Fenetre extends JFrame {
 		button_1.setName("precedent");
 		button_1.setBounds(260, 340, 140, 40);
 		panel4.add(button_1);
+		
+		panel5 = new JPanel();
+		panel5.setLayout(null);
+		layeredPane.add(panel5, "name_2922462456269");
+		
+		lblCasierDeLa = new JLabel("Casier de la personne concerncée: ");
+		lblCasierDeLa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCasierDeLa.setFont(new Font("Dialog", Font.ITALIC, 30));
+		lblCasierDeLa.setBounds(0, 50, 1000, 50);
+		panel5.add(lblCasierDeLa);
 	}
 	public JTextField getTextField() {
 		return textField;
@@ -427,5 +439,8 @@ public class Fenetre extends JFrame {
 	}
 	public JButton getButton_2() {
 		return button_2;
+	}
+	public JPanel getPanel5() {
+		return panel5;
 	}
 }
