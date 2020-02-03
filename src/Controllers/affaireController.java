@@ -7,7 +7,10 @@ import java.sql.SQLException;
 
 import javax.swing.JButton;
 
+import DAO.Affaire;
+import DAO.DAOAffaire;
 import DAO.DAOInfraction;
+import DAO.Individu;
 import DAO.Infraction;
 import Fenetres.Fenetre;
 
@@ -15,14 +18,14 @@ public class affaireController implements ActionListener {
 
 	Fenetre fenetre;
 	Connection cnx;
-	String Matricule;
-	String CodeI;
+	Individu personne;
+	Infraction infraction;
 	
-	public affaireController(Fenetre fenetre, Connection cnx, String Matricule, String CodeI ) {
+	public affaireController(Fenetre fenetre, Connection cnx, Individu personne, Infraction infraction ) {
 		this.fenetre = fenetre;
 		this.cnx = cnx;
-		this.Matricule = Matricule;
-		this.CodeI = CodeI;
+		this.personne = personne;
+		this.infraction = infraction;
 		
 		fenetre.switchPannels(fenetre.panel2);
 		
@@ -42,14 +45,24 @@ public class affaireController implements ActionListener {
 		case "suivant":
 			
 			String NumAffaire = fenetre.getTextField_3().getText();
-			String DescAffaire = fenetre.getTextField_7().getText();	
+			String DescAffaire = fenetre.getTextField_7().getText();
+			Affaire affaire = new Affaire(NumAffaire, DescAffaire);
+			DAOAffaire daoaff = new DAOAffaire(cnx);
+			try {
+				daoaff.save(affaire);
+				//Affaire affaire = daoaff.find(NumAffaire);
+				casierController casier = new casierController(fenetre, cnx, personne, infraction, affaire);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
-			casierController casier = new casierController(fenetre, cnx, Matricule, CodeI, NumAffaire);
+			
 		
 			
 			break;
 		case "precedent":
-			infractionController c = new infractionController(fenetre, cnx, Matricule);
+			infractionController c = new infractionController(fenetre, cnx, personne);
 			break;
 
 		default:

@@ -42,6 +42,31 @@ public class DAOCasier {
 	}
 	
 	
+	public Casier findInfraction(String Matricule) throws SQLException {
+		
+		String SQL = "SELECT CodeI FROM Casiers WHERE Matricule=?";
+		PreparedStatement preparedStatement = cnx.prepareStatement(SQL);
+		preparedStatement.setString(1,Matricule);
+		ResultSet result = preparedStatement.executeQuery();
+		result.next();
+		
+		Casier c = new Casier()
+				.setMatricule(result.getString("Matricule"))
+				.setCodeI(result.getString("CodeI"))
+				.setDateI(result.getDate("DateI"))
+				.setDescription(result.getString("Description"))
+				.setPays(result.getString("Pays"))
+				.setVille(result.getString("Ville"))
+				.setNumAffaire(result.getString("NumAffaire"))
+				
+				;
+				
+		
+		return c;
+
+	}
+	
+	
 	
 	
 	public void save(Casier i) throws SQLException {
@@ -139,5 +164,31 @@ public class DAOCasier {
 		
 		return count;
 	}
+	
+	public List<Casier> findCasiersFromMatricule(String matricule) throws SQLException{
+		String SQL = "SELECT * FROM Casiers where Matricule = ?";
+		PreparedStatement preparedStatement = cnx.prepareStatement(SQL);
+		preparedStatement.setString(1, matricule);
+		ResultSet result = preparedStatement.executeQuery();
+
+		List<Casier> casiers = new ArrayList<>();
+		
+		while (result.next()) {
+			Casier c = new Casier()
+					.setMatricule(result.getString("Matricule"))
+					.setCodeI(result.getString("CodeI"))
+					.setDateI(result.getDate("DateI"))
+					.setDescription(result.getString("Description"))
+					.setPays(result.getString("Pays"))
+					.setVille(result.getString("Ville"))
+					.setNumAffaire(result.getString("NumAffaire"))
+					
+					;
+			
+			casiers.add(c);
+		}
+		
+		return casiers;
+	} 
 
 }

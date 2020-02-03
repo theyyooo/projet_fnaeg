@@ -18,12 +18,12 @@ public class infractionController implements ActionListener {
 
 	Fenetre fenetre;
 	Connection cnx;
-	String Matricule;
+	Individu personne;
 	
-	public infractionController(Fenetre fenetre, Connection cnx, String Matricule) {
+	public infractionController(Fenetre fenetre, Connection cnx, Individu personne) {
 		this.fenetre = fenetre;
 		this.cnx = cnx;
-		this.Matricule = Matricule;
+		this.personne = personne;
 		
 		fenetre.switchPannels(fenetre.panel4);
 		
@@ -44,7 +44,7 @@ public class infractionController implements ActionListener {
 			DAOInfraction DAOinf = new DAOInfraction(cnx);
 			try {
 				Infraction ObjInfration = DAOinf.find(infraction);
-				affaireController affaire = new affaireController(fenetre, cnx, Matricule, ObjInfration.getCodeI());
+				affaireController affaire = new affaireController(fenetre, cnx, personne, ObjInfration);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

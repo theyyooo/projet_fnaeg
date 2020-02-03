@@ -67,7 +67,7 @@ public class individuController implements ActionListener {
 			}
 				
 			
-			infractionController i = new infractionController(fenetre, cnx, personne.getMatricule());
+			infractionController i = new infractionController(fenetre, cnx, personne);
 					
 			
 			break;

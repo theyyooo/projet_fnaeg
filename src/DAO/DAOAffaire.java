@@ -28,7 +28,6 @@ public class DAOAffaire {
 		
 		Affaire c = new Affaire()
 				.setNumAffaire(result.getString("NumAffaire"))
-				.setDateAffaire(result.getDate("DateAffaire"))
 				.setDescription(result.getString("Description"));
 				
 		
@@ -41,12 +40,11 @@ public class DAOAffaire {
 	
 	
 	public void save(Affaire i) throws SQLException {
-		String SQL = "INSERT INTO Affaires (NumAffaire, DateAffaire, Description)"
-				+ "VALUES (?, ?, ?)";
+		String SQL = "INSERT INTO Affaires (NumAffaire, Description)"
+				+ "VALUES (?, ?)";
 		PreparedStatement preparedStatement = cnx.prepareStatement(SQL);
 		preparedStatement.setString(1,i.getNumAffaire());
-		preparedStatement.setDate(2,(Date) i.getDateAffaire());
-		preparedStatement.setString(3,i.getDescription());
+		preparedStatement.setString(2,i.getDescription());
 
 		
 		preparedStatement.executeQuery();
@@ -64,7 +62,6 @@ public class DAOAffaire {
 		
 		PreparedStatement preparedStatement = cnx.prepareStatement(SQL);
 		preparedStatement.setString(1,i.getNumAffaire());
-		preparedStatement.setDate(2,(Date) i.getDateAffaire());
 		preparedStatement.setString(3,i.getDescription());
 		
 		
@@ -95,7 +92,6 @@ public class DAOAffaire {
 		while (result.next()) {
 			Affaire i = new Affaire()
 					.setNumAffaire(result.getString("NumAffaire"))
-					.setDateAffaire(result.getDate("DateAffaire"))
 					.setDescription(result.getString("Description"));
 			
 			affaires.add(i);

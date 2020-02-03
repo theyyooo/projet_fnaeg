@@ -63,6 +63,9 @@ public class Fenetre extends JFrame {
 	private JButton button_3;
 	private JButton button_2;
 	private JLabel lblCasierDeLa;
+	private JLabel label;
+	private JTextField textField_8;
+	public JTable table;
 
 	/**
 	 * Launch the application.
@@ -120,7 +123,7 @@ public class Fenetre extends JFrame {
 				
 		fieldIndividu = new JTextField();
 		fieldIndividu.setHorizontalAlignment(SwingConstants.CENTER);
-		fieldIndividu.setBounds(400, 130, 200, 40);
+		fieldIndividu.setBounds(200, 134, 200, 40);
 		panel1.add(fieldIndividu);
 		fieldIndividu.setColumns(10);
 		
@@ -137,6 +140,22 @@ public class Fenetre extends JFrame {
 		panel1.add(btnCliquezIciPour);
 		
 		this.panel1 = panel1;
+		
+		textField_8 = new JTextField();
+		textField_8.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_8.setColumns(10);
+		textField_8.setBounds(600, 130, 200, 40);
+		panel1.add(textField_8);
+		
+		JLabel lblNewLabel_1 = new JLabel("Nom:");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(200, 112, 200, 15);
+		panel1.add(lblNewLabel_1);
+		
+		JLabel lblPrnom = new JLabel("Prénom");
+		lblPrnom.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPrnom.setBounds(600, 112, 200, 15);
+		panel1.add(lblPrnom);
 
 		
 		//PANNEL 2
@@ -336,11 +355,24 @@ public class Fenetre extends JFrame {
 		panel5.setLayout(null);
 		layeredPane.add(panel5, "name_2922462456269");
 		
-		lblCasierDeLa = new JLabel("Casier de la personne concerncée: ");
-		lblCasierDeLa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCasierDeLa = new JLabel("Casier de");
+		lblCasierDeLa.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCasierDeLa.setFont(new Font("Dialog", Font.ITALIC, 30));
-		lblCasierDeLa.setBounds(0, 50, 1000, 50);
+		lblCasierDeLa.setBounds(0, 50, 500, 50);
 		panel5.add(lblCasierDeLa);
+		
+		label = new JLabel("");
+		label.setHorizontalAlignment(SwingConstants.LEFT);
+		label.setFont(new Font("Dialog", Font.ITALIC, 30));
+		label.setBounds(500, 50, 500, 50);
+		panel5.add(label);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(50, 135, 900, 250);
+		panel5.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setColumnHeaderView(table);
 	}
 	public JTextField getTextField() {
 		return textField;
@@ -442,5 +474,18 @@ public class Fenetre extends JFrame {
 	}
 	public JPanel getPanel5() {
 		return panel5;
+	}
+	public JLabel getLabel() {
+		return label;
+	}
+	
+	public void setLabel(String txt1, String txt2) {
+		label.setText(txt1+' '+txt2);
+	}
+	public JTextField getTextField_8() {
+		return textField_8;
+	}
+	public JTable getTable() {
+		return table;
 	}
 }

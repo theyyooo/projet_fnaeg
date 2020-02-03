@@ -25,6 +25,30 @@ public class DAOIndividu {
 		result.next();
 		
 		Individu c = new Individu()
+				.setMatricule(result.getString("Matricule"))
+				.setNom(result.getString("Nom"))
+				.setPrenom(result.getString("Prenom"))
+				.setAdresse(result.getString("Adresse"))
+				.setVille(result.getString("Ville"))
+				.setPays(result.getString("Pays"))
+				;
+				
+		
+		return c;
+
+	}
+	
+	public Individu findWithName(String nom, String prenom) throws SQLException {
+		
+		String SQL = "SELECT * FROM Personnes WHERE Nom=? AND Prenom = ?";
+		PreparedStatement preparedStatement = cnx.prepareStatement(SQL);
+		preparedStatement.setString(1,nom);
+		preparedStatement.setString(2,prenom);
+		ResultSet result = preparedStatement.executeQuery();
+		result.next();
+		
+		Individu c = new Individu()
+				.setMatricule(result.getString("Matricule"))
 				.setNom(result.getString("Nom"))
 				.setPrenom(result.getString("Prenom"))
 				.setAdresse(result.getString("Adresse"))
